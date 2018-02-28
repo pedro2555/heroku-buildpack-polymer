@@ -38,7 +38,11 @@ npm install babel-core rollup-plugin-babel rollup-plugin-commonjs
 speak "Installing package dependencies..."
 bower install
 speak "Building and bundling Polymer project..."
-polymer build --bundle --js-minify --css-minify --html-minify
+if [ -f $1/polymer.json ]; then
+  polymer build
+else
+  polymer build --bundle --js-minify --css-minify --html-minify
+fi
 
 mkdir -p $BUILD_DIR/vendor/bin
 mv $BUILD_DIR/$NODE_DIR $BUILD_DIR/vendor/bin/
